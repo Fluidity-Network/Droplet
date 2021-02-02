@@ -6,17 +6,17 @@ class FluidityConsensus {
 	static isValidDrop(drop) {
 		// 1. Check that the input amounts are less than or equal to the output amounts
 		let values_currency = {};
-		for(let i = 0; i < inputs.length; i++) {
-			if(values_currency[inputs[i].currency] == null) {
-				values_currency[inputs[i].currency] = 0;
+		for(let i = 0; i < drop.inputs.length; i++) {
+			if(values_currency[drop.inputs[i].currency] == null) {
+				values_currency[drop.inputs[i].currency] = 0;
 			}
-			values_currency[inputs[i].currency] += inputs[i].amount;
+			values_currency[drop.inputs[i].currency] += drop.inputs[i].amount;
 		}
-		for(let i = 0; i < outputs.length; i++) {
-			if(values_currency[outputs[i].currency] == null) {
-				values_currency[outputs[i].currency] = 0;
+		for(let i = 0; i < drop.outputs.length; i++) {
+			if(values_currency[drop.outputs[i].currency] == null) {
+				values_currency[drop.outputs[i].currency] = 0;
 			}
-			values_currency[outputs[i].currency] -= outputs[i].amount;
+			values_currency[drop.outputs[i].currency] -= drop.outputs[i].amount;
 		}
 		let values = Object.values(values_currency);
 		for(let i = 0; i < values.length; i++) {

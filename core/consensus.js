@@ -4,19 +4,22 @@ class FluidityConsensus {
 	}
 	
 	static isValidDrop(drop) {
+		drop = JSON.parse(drop);
 		// 1. Check that the input amounts are less than or equal to the output amounts
 		let values_currency = {};
 		for(let i = 0; i < drop.inputs.length; i++) {
-			if(values_currency[drop.inputs[i].currency] == null) {
-				values_currency[drop.inputs[i].currency] = 0;
+			let input = JSON.parse(drop.inputs[i]).body;
+			if(values_currency[input.currency] == null) {
+				values_currency[input.currency] = 0;
 			}
-			values_currency[drop.inputs[i].currency] += drop.inputs[i].amount;
+			values_currency[input.currency] += input.amount;
 		}
 		for(let i = 0; i < drop.outputs.length; i++) {
-			if(values_currency[drop.outputs[i].currency] == null) {
-				values_currency[drop.outputs[i].currency] = 0;
+			let output = JSON.parse(drop.outputs[i]);
+			if(values_currency[output.currency] == null) {
+				values_currency[output.currency] = 0;
 			}
-			values_currency[drop.outputs[i].currency] -= drop.outputs[i].amount;
+			values_currency[output.currency] -= output.amount;
 		}
 		let values = Object.values(values_currency);
 		for(let i = 0; i < values.length; i++) {

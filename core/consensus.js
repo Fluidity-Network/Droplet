@@ -10,4 +10,8 @@ class FluidityConsensus() {
 	static isValidWave(wave) {
 		
 	}
+	
+	static forgeDrop(drop) {
+		
+	}
 }

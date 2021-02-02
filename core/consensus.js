@@ -1,4 +1,4 @@
-class FluidityConsensus() {
+class FluidityConsensus {
 	static nextForger(addressData, hash) {
 		
 	}

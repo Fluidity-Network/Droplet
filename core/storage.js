@@ -67,9 +67,14 @@ class FluidityDrop {
 	}
 	stringify() {
 		let stringify_inputs = [];
-		for(let i = 0; i < inputs.length; i++) {
-			stringify_inputs.push();
+		for(let i = 0; i < this.inputs.length; i++) {
+			stringify_inputs.push(this.inputs[i].stringify());
 		}
+		let stringify_outputs = [];
+		for(let i = 0; i < this.outputs.length; i++) {
+			stringify_outputs.push(this.outputs[i].stringify());
+		}
+		return '{"inputs":"' + JSON.stringify(stringify_inputs) + '","outputs":"' + JSON.stringify(stringify_outputs) + '","fee":' + this.fee + ',"data":"' + this.data + '"}';
 	}
 }
 

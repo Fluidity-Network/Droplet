@@ -34,8 +34,24 @@ class FluidityConsensus {
 		// 3. Check that the first input address has enough funds to cover the fee
 		// TODO
 		
-		// 4. Check that all digital signatures are valid 
-		// TODO
+		// 4. Check that all hashes and digital signatures are valid 
+		for(let i = 0; i < drop.inputs.length; i++) {
+			let input = JSON.parse(drop.inputs[i]);
+			let fluidity_input = new FluidityInput(input.body.address, input.body.amount, input.body.currency, input.body.nonce);
+			if(fluidity_input.getHash() != input.header.hash) {
+				return false;
+			}
+			let verify = FluidityCrypto.verify(input.header.signature);
+			if(!verify.valid) {
+				return false;
+			}
+			if(verify.string != input.header.hash) {
+				return false;
+			}
+			if(FluidityCrypto.addressFromPublicKey(verify.publicKey) != input.body.address) {
+				return false;
+			}
+		}
 		
 		// Return true if all above conditions are met
 		return true;

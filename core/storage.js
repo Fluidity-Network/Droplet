@@ -88,7 +88,56 @@ class FluidityInput {
 		this.hash;
 		this.signature;
 		this.getHash();
-		this.sign();
+		if(this.key != null) {
+			this.sign();
+		}
+	}
+	getAddress() {
+		return address;
+	}
+	setAddress(address) {
+		this.address = address;
+		this.getHash();
+		if(this.key != null) {
+			this.sign();
+		}
+	}
+	getAmount() {
+		return amount;
+	}
+	setAmount(amount) {
+		this.amount = amount;
+		this.getHash();
+		if(this.key != null) {
+			this.sign();
+		}
+	}
+	getCurrency() {
+		return this.currency;
+	}
+	setCurrency(currency) {
+		this.currency = currency;
+		this.getHash();
+		if(this.key != null) {
+			this.sign();
+		}
+	}
+	getNonce() {
+		return this.nonce;
+	}
+	setNonce(nonce) {
+		this.nonce = nonce;
+		this.getHash();
+		if(this.key != null) {
+			this.sign();
+		}
+	}
+	setKey(key) {
+		this.key = key;
+		this.getHash();
+		if(this.key != null) {
+			this.sign();
+		}
 	}
 	getHash() {
 		this.hash = FluidityCrypto.hash(this.stringify(true));

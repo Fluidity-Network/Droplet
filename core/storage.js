@@ -44,6 +44,9 @@ class FluidityDrop {
 	addInput(input) {
 		this.inputs.push(input);
 	}
+	removeInput(index) {
+		this.inputs.splice(index, 1);
+	}
 	getOutputs() {
 		return this.outputs;
 	}
@@ -52,6 +55,9 @@ class FluidityDrop {
 	}
 	addOutput(output) {
 		this.outputs.push(output);
+	}
+	removeOutput(index) {
+		this.outputs.splice(index, 1);
 	}
 	getFee() {
 		return this.fee;

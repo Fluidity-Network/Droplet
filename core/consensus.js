@@ -42,7 +42,7 @@ class FluidityConsensus {
 		
 	}
 	
-	static forgeDrop(drop) {
+	static forgeWave(wave) {
 		
 	}
 }

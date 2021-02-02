@@ -20,5 +20,8 @@ class FluidityCrypto {
 	static hash(data) {
 		return envoy.sha256(data);
 	}
+	static sign(key, data) {
+		return envoy.sign({privateKey: key, string: data});
+	}
 }
 let envoy = new tEnvoy();

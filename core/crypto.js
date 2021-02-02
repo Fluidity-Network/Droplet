@@ -17,5 +17,8 @@ class FluidityCrypto {
 		let addr = "0FAx" + hex.substring(hex.length - 46, hex.length - 6);
 		return addr;
 	}
+	static hash(data) {
+		return envoy.sha256(data);
+	}
 }
 let envoy = new tEnvoy();

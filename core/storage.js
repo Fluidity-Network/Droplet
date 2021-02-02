@@ -29,7 +29,52 @@ class FluidityWave() {
 }
 
 class FluidityDrop() {
-	constructor() {
+	constructor(inputs, outputs, fee, data) {
+		this.inputs;
+		this.outputs;
+		this.fee;
+		this.data;
+	}
+	getInputs() {
+		return this.inputs;
+	}
+	setInputs(inputs) {
+		this.inputs = inputs;
+	}
+	addInput(input) {
+		this.inputs.push(input);
+	}
+	getOutputs() {
+		return this.outputs;
+	}
+	setOutputs(outputs) {
+		this.outputs = outputs;
+	}
+	addOutput(output) {
+		this.outputs.push(output);
+	}
+	getFee() {
+		return this.fee;
+	}
+	setFee(fee) {
+		this.fee = fee;
+	}
+	getData() {
+		return this.data;
+	}
+	setData(fee) {
+		this.fee = data;
+	}
+}
+
+class FluidityInput() {
+	constructor(address, amount, currency) {
+		
+	}
+}
+
+class FluidityOutput() {
+	constructor(address, amount, currency) {
 		
 	}
 }

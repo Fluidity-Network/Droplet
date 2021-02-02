@@ -118,6 +118,24 @@ class FluidityOutput {
 		this.amount = amount || 0;
 		this.currency = currency || "flow";
 	}
+	getAddress() {
+		return address;
+	}
+	setAddress(address) {
+		this.address = address;
+	}
+	getAmount() {
+		return amount;
+	}
+	setAmount(amount) {
+		this.amount = amount;
+	}
+	getCurrency() {
+		return this.currency;
+	}
+	setCurrency(currency) {
+		this.currency = currency;
+	}
 	stringify() {
 		return '{"address":"' + this.address + '","amount":' + this.amount + ',"currency":"' + this.currency + '"}';
 	}

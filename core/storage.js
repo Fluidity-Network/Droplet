@@ -65,28 +65,45 @@ class FluidityDrop {
 	setData(fee) {
 		this.fee = data;
 	}
+	stringify() {
+		let stringify_inputs = [];
+		for(let i = 0; i < inputs.length; i++) {
+			stringify_inputs.push();
+		}
+	}
 }
 
 class FluidityInput {
-	constructor(address, amount, currency, nonce) {
+	constructor(address, amount, currency, nonce, key) {
 		this.address = address || "";
 		this.amount = amount || 0;
 		this.currency = currency || "flow";
 		this.nonce = nonce || 0;
+		this.key = key || null;
 		this.hash;
 		this.signature;
 		this.getHash();
+		this.sign();
 	}
 	getHash() {
-		this.hash = FluidityCrypto.hash(this.stringify());
+		this.hash = FluidityCrypto.hash(this.stringify(true));
 		return this.hash;
 	}
-	sign(key) {
-		this.signature = FluidityCrypto.sign(key, this.getHash());
-		return FluidityCrypto.sign(key, this.getHash());
+	sign() {
+		this.signature = FluidityCrypto.sign(this.key, this.getHash());
+		return this.signature;
 	}
-	stringify() {
-		return '{"address":"' + this.address + '","amount":' + this.amount + ',"currency":"' + this.currency + '","nonce":' + this.nonce + '}';
+	stringify(bodyOnly) {
+		if(bodyOnly == null) {
+			bodyOnly = false;
+		}
+		if(bodyOnly) {
+			return '{"address":"' + this.address + '","amount":' + this.amount + ',"currency":"' + this.currency + '","nonce":' + this.nonce + '}';
+		} else {
+			this.getHash();
+			this.sign();
+			return '{"header":{"hash":"' + this.hash + '","signature":"' + this.signature + '"},"body":{"address":"' + this.address + '","amount":' + this.amount + ',"currency":"' + this.currency + '","nonce":' + this.nonce + '}}';
+		}
 	}
 }
 

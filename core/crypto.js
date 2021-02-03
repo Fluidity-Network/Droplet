@@ -4,10 +4,14 @@ class FluidityCrypto {
 			return envoy.randomWords({length: 12});
 		} else {
 			let nums = "";
-			for(let i = 0; i < 11; i++) {
-				nums += seed[i].toString() + ","
+			let newSeed = [];
+			for(let i = 0; i < 12; i++) {
+				newSeed.push(seed.splice(Math.random() * (seed.length - 1), 1) % 2048);
 			}
-			nums += seed[11].toString();
+			for(let i = 0; i < 11; i++) {
+				nums += newSeed[i].toString() + ","
+			}
+			nums += newSeed[11].toString();
 			return envoy.numbersToWords({string: nums});
 		}
 	}
@@ -16,10 +20,14 @@ class FluidityCrypto {
 			return envoy.randomWords({length: 24});
 		} else {
 			let nums = "";
-			for(let i = 0; i < 23; i++) {
-				nums += seed[i].toString() + ","
+			let newSeed = [];
+			for(let i = 0; i < 24; i++) {
+				newSeed.push(seed.splice(Math.random() * (seed.length - 1), 1) % 2048);
 			}
-			nums += seed[23].toString();
+			for(let i = 0; i < 23; i++) {
+				nums += newSeed[i].toString() + ","
+			}
+			nums += newSeed[23].toString();
 			return envoy.numbersToWords({string: nums});
 		}
 	}

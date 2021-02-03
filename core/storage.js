@@ -224,6 +224,11 @@ class FluidityState {
 		FluidityState.trimCache();
 		return result;
 	}
+	static set(address, value) {
+		FluidityState.cache[address] = value;
+		// TODO: send data to localhost server to set database value
+		FluidityState.trimCache();
+	}
 	static trimCache() {
 		while(Object.keys(FluidityState.cache).length > FluidityState.max_cache) {
 			delete FluidityState.cache[FluidityState.cache_access_order.splice(0, 1)[0]];

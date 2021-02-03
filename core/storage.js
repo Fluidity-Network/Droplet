@@ -85,16 +85,17 @@ class FluidityDrop {
 }
 
 class FluidityInput {
+	#key;
 	constructor(address, amount, currency, nonce, key) {
 		this.address = address || "";
 		this.amount = amount || 0;
 		this.currency = currency || "flow";
 		this.nonce = nonce || 0;
-		this.key = key || null;
+		this.#key = key || null;
 		this.hash;
 		this.signature;
 		this.getHash();
-		if(this.key != null) {
+		if(this.#key != null) {
 			this.sign();
 		}
 	}
@@ -104,7 +105,7 @@ class FluidityInput {
 	setAddress(address) {
 		this.address = address;
 		this.getHash();
-		if(this.key != null) {
+		if(this.#key != null) {
 			this.sign();
 		}
 	}
@@ -114,7 +115,7 @@ class FluidityInput {
 	setAmount(amount) {
 		this.amount = amount;
 		this.getHash();
-		if(this.key != null) {
+		if(this.#key != null) {
 			this.sign();
 		}
 	}
@@ -124,7 +125,7 @@ class FluidityInput {
 	setCurrency(currency) {
 		this.currency = currency;
 		this.getHash();
-		if(this.key != null) {
+		if(this.#key != null) {
 			this.sign();
 		}
 	}
@@ -134,14 +135,14 @@ class FluidityInput {
 	setNonce(nonce) {
 		this.nonce = nonce;
 		this.getHash();
-		if(this.key != null) {
+		if(this.#key != null) {
 			this.sign();
 		}
 	}
 	setKey(key) {
-		this.key = key;
+		this.#key = key;
 		this.getHash();
-		if(this.key != null) {
+		if(this.#key != null) {
 			this.sign();
 		}
 	}
@@ -150,7 +151,7 @@ class FluidityInput {
 		return this.hash;
 	}
 	sign() {
-		this.signature = FluidityCrypto.sign(this.key, this.getHash());
+		this.signature = FluidityCrypto.sign(this.#key, this.getHash());
 		return this.signature;
 	}
 	stringify(bodyOnly) {
@@ -194,4 +195,8 @@ class FluidityOutput {
 	stringify() {
 		return '{"address":"' + this.address + '","amount":' + this.amount + ',"currency":"' + this.currency + '"}';
 	}
+}
+
+class FluidityState {
+	
 }

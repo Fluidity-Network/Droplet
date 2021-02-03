@@ -1,9 +1,27 @@
 class FluidityCrypto {
-	static generate12Words() {
-		return envoy.randomWords({length: 12});
+	static generate12Words(seed) {
+		if(seed == null) {
+			return envoy.randomWords({length: 12});
+		} else {
+			let nums = "";
+			for(let i = 0; i < 11; i++) {
+				nums += seed[i].toString() + ","
+			}
+			nums += seed[11].toString();
+			return envoy.numbersToWords({string: nums});
+		}
 	}
-	static generate24Words() {
-		return envoy.randomWords({length: 24});
+	static generate24Words(seed) {
+		if(seed == null) {
+			return envoy.randomWords({length: 24});
+		} else {
+			let nums = "";
+			for(let i = 0; i < 23; i++) {
+				nums += seed[i].toString() + ","
+			}
+			nums += seed[23].toString();
+			return envoy.numbersToWords({string: nums});
+		}
 	}
 	static getWalletKey(words, nonce) {
 		let nums = envoy.wordsToNumbers({string: words});

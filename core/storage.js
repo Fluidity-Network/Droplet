@@ -198,5 +198,35 @@ class FluidityOutput {
 }
 
 class FluidityState {
+	static server = "http://localhost:3569"; // 3569 spells out FLOW on a phone keypad
+	static cache = {};
+	static cache_access_order = [];
+	static max_cache = 500;
 	
+	static get(address, skipCache) {
+		if(skipCache == null) {
+			skipCache = false;
+		}
+		let result;
+		if(FluidityState.cache[address] == null || skipCache) {
+			// TODO: check localhost server for database value, cache result
+			FluidityState.cache[address] = {}; // for now, just storing an empty object
+			result = {};
+		} else {
+			result = FluidityState.cache[address];
+		}
+		if(!FluidityState.cache_access_order.includes(address)) {
+			FluidityState.cache_access_order.push(address);
+		} else {
+			FluidityState.cache_access_order.splice(FluidityState.cache_access_order.indexOf(address), 1);
+			FluidityState.cache_access_order.push(address);
+		}
+		FluidityState.trimCache();
+		return result;
+	}
+	static trimCache() {
+		while(Object.keys(FluidityState.cache).length > FluidityState.max_cache) {
+			delete FluidityState.cache[FluidityState.cache_access_order.splice(0, 1)[0]];
+		}
+	}
 }
